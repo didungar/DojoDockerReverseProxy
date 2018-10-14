@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+    php:
+         #image: php:7.2
+         build: ../phpfpm
+         restart: "unless-stopped"
+         volumes:
+           #- "./app/config/php.ini:/usr/local/etc/php/php.ini"
+           - "./:/www"

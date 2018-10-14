@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+    restart: "unless-stopped"
+    volumes:
+      #- "./var/logs/nginx:/var/log/nginx"
+      - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "./:/www"
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+#      - LETSENCRYPT_HOST=domain.com
+#      - LETSENCRYPT_EMAIL=mail@domain.com
+    depends_on:
+      - php
+
+  php:
+    #image: php:7.2
+    build: ../phpfpm
+    restart: "unless-stopped"
+    volumes:
+      #- "./app/config/php.ini:/usr/local/etc/php/php.ini"
+      - "./:/www"
+
